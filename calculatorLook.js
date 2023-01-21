@@ -7,7 +7,7 @@ const lastRow = document.querySelector('.lastRow');
 const numbers1 = document.querySelector('.numbers1');
 
 
-const items = ["clc", "/", "*", '-', '+', 'Enter', '0', '.'];
+const items = ["clc", "DEL", "*", '-', '+', 'Enter', '0', '.'];
 const numbers2 = document.querySelector('.numbers2');
 const numbers3 = document.querySelector('.numbers3');
 
@@ -16,24 +16,23 @@ const numbers = document.querySelector('.numbers');
 let cells = [];
 function gridCalculatorButtons(){
   
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 2; i++) {
     const cell = document.createElement('button');
     cell.classList.add('cell')
     cell.textContent = items[i]; 
-    cell.setAttribute('style', 'background: pink;');
+    cell.classList.add('cellR')
     row1.appendChild(cell)
     cells.push(cell);
   };
   
 }
 
-const items2 = ["(", ")", "DEL", '+/-', '+'];
+const items2 = ["-", "/", "*", '+/-', '+'];
 function firstRow(){
   for (let i = 0; i < 4; i++) {
     const cell = document.createElement('button');
     cell.classList.add('cell')
     cell.textContent = items2[i]; 
-    cell.setAttribute('style', 'background: pink;');
     row.appendChild(cell)
     cells.push(cell);
   };
@@ -48,7 +47,6 @@ function numberButtons(){
       const cell = document.createElement('button');
       cell.classList.add('cell')
       cell.textContent = j; 
-      cell.setAttribute('style', 'background: pink;');
       if((j <= 9) && (j >= 7)){
         numbers1.appendChild(cell)
       }
@@ -67,12 +65,13 @@ function numberButtons(){
 
 function plusAndEnterColumn() {
   for (let i = 4; i < 6; i++) {
-    const cellP = document.createElement('button');
-    cellP.classList.add('cellP')
-    cellP.textContent = items[i]; 
-    cellP.setAttribute('style', 'background: pink;');
-    col.appendChild(cellP)
-    cells.push(cellP);
+    const cell = document.createElement('button');
+    cell.classList.add('cell')
+    cell.classList.add('cellP')
+    cell.textContent = items[i]; 
+    
+    col.appendChild(cell)
+    cells.push(cell);
   };
 }
 
@@ -81,7 +80,7 @@ function plusAndEnterColumn() {
       const cell = document.createElement('button');
       cell.classList.add('cell')
       cell.textContent = items[i]; 
-      cell.setAttribute('style', 'background: pink;');
+      
       lastRow.appendChild(cell)
       if(items[i] === "0"){
         cell.classList.add('cellR')
@@ -97,7 +96,7 @@ function plusAndEnterColumn() {
 const numeros = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 const operations = ["+", "-", "*", "/"];
 const comma = "."
-let ans;
+
 
 firstRow()
 gridCalculatorButtons();
@@ -133,85 +132,164 @@ cells.forEach(cell => {
 //     console.log(this.textContent)
 //   }
 // });
+const firstOperand = document.getElementById("firstOperand")
+const secondOperand = document.getElementById("secondOperand")
+const op = document.getElementById("op")
+const r = document.querySelector('.r')
 
-const result = document.querySelector('.result')
+const result = document.getElementById('result')
 cells.forEach(cell =>{
   cell.addEventListener("click", function(){
-    if(operator === "" && numeros.includes(cell.textContent)){
+
+    if((op.textContent === "") && numeros.includes(cell.textContent)){
         firstValue += this.textContent;
-        result.textContent = firstValue;
-    }else if(numeros.includes(cell.textContent)){
-      console.log("second value")
-      
-      secondValue += this.textContent;
-      result.textContent += this.textContent;
-      console.log(secondValue)
+        firstOperand.textContent = firstValue;
+
     }
+    else if(numeros.includes(cell.textContent)){
+      secondValue += this.textContent;
+      secondOperand.textContent += this.textContent;
+    }
+    // else if((firstOperand.textContent != '') && (secondOperand.textContent != '')){
+    //   resetCalculator();
+    //   firstOperand.textContent = this.textContent
+    //   console.log(firstOperand)
+    //   console.log("chairgfhjir")
+    // }
     
   });
   
 })
 
-let op =""
+
+let lastOperator = "";
 cells.forEach(cell =>{
   cell.addEventListener("click", function(){
     if(operations.includes(cell.textContent)){
-      console.log("operator awel mara ki yod5el" + operator)
-      operator = ""
-      operator = this.textContent;
-      console.log("operator ki yet3aba " + operator)
-      result.textContent += this.textContent;
-      result.textContent = firstValue + operator
-      if(n>1)
-        result.textContent = " ANS " + operator;
+      if((firstValue != "") && secondOperand.textContent == ''){
+        operator = this.textContent;
+        op.textContent = operator;
+        lastOperator = operator
+        console.log
       }
+      if((firstValue != "") && (secondValue != "")){
+        console.log(op.textContent)
+        let c = operate(parseInt(firstValue), parseInt(secondValue), op.textContent)
+        firstValue = c;
+        secondValue = "";
+        firstOperand.textContent = c;
+        secondOperand.textContent = "";
+        operator = this.textContent;
+        op.textContent = operator;
+
+      }
+      if(n == 2){
+        firstOperand.textContent = firstValue;
+        secondOperand.textContent = ""
+        result.textContent = ""
+        op.textContent = this.textContent
+      }
+    
+       }
 
       
     } ) 
     
   });
   
+cells.forEach(cell =>{
+  cell.addEventListener('click', () =>{
+    if(cell.textContent === '.'){
+      if((firstValue != '') && (firstValue.split(".").length - 1 != 1)){
+        firstValue += '.'
+        firstOperand.textContent += '.'
+      }
+      if((secondValue != '') && (secondValue.split(".").length - 1!= 1)){
+        secondValue += '.'
+        secondOperand.textContent += '.'
+      }
+    }
+
+    if(cell.textContent === '+/-'){
+      if((firstValue.split("-").length - 1 != 1) && firstValue != ''){
+        firstValue = '-' + firstValue;
+        firstOperand.textContent = firstValue
+      }
+      if((secondValue.split("-").length - 1 != 1) && secondValue != ''){
+        secondValue = '-' + secondValue;
+        secondOperand.textContent = secondValue
+      }
+    }
+
+    if(cell.textContent === 'DEL'){
+      if (secondOperand.textContent != ''){
+        secondOperand.textContent = secondOperand.textContent.slice(0,-1);
+        secondValue = secondOperand.textContent
+        console.log(secondValue)
+    } else if (op.textContent != ''){
+        op.textContent = '';
+    } else if (firstOperand.textContent != ''){
+        firstOperand.textContent = firstOperand.textContent.slice(0,-1);
+        firstValue = firstOperand.textContent
+    } else {
+        console.log("It seems you are pushing the backspace button regardless of the fact that there's nothing to clear. Hope you enjoy it!")
+    }                   
+    }
+    
+  })
+})
 
 
 
 let n = 1;
-console.log("this is taking so long")
-let c;
+
+let ans;
 cells.forEach(cell =>{
   cell.addEventListener('click', () =>{
     
     if(cell.textContent === 'Enter'){
-      console.log("time number")
-      console.log(n)
-      console.log("first value " + firstValue)
-      console.log("Secc value " + secondValue)
-      c = operate(parseInt(firstValue), parseInt(secondValue), operator);
-      result.textContent +=  " = " + c;
-      firstValue = c;
-      secondValue = "";
-      operator = "";
-      n = 2;
+      if((firstValue != "") && (secondValue != "") && op.textContent != ""){
+        ans = operate(parseFloat(firstValue), parseFloat(secondValue), op.textContent);
+        result.textContent +=  " = " + ans;
+        console.log(firstValue)
+        console.log(secondValue)
+        console.log(operator)
+        firstValue = ans;
+        secondValue = "";
+        operator = "";
+        n = 2;
+        console.log('ubb')
+      }
+      
      }
   }
   )
 })
 
+  resultBloc = document.querySelector('.result')
+  history = document.querySelector('.history')
 cells.forEach(cell =>{
   cell.addEventListener('click', () =>{
     
     if(cell.textContent === 'clc'){
-      firstValue = "";
-      secondValue = "";
-      operator = "";
-      result.textContent = ""
-      n = 1
+      history.textContent += resultBloc.textContent
+      resetCalculator();
+     
 
      }
   }
   )
 })
-
-
+history.textContent = 'hello';
+function resetCalculator(){
+      firstValue = "";
+      secondValue = "";
+      operator = "";
+      firstOperand.textContent = ""
+      secondOperand.textContent = ""
+      result.textContent = ""
+      op.textContent = ""
+}
 // operate(parseInt(firstValue), parseInt(secondValue), operator)
 
 const add = function(a, b) {
@@ -272,3 +350,11 @@ const operate = function(a, b, op) {
 }
 
 /* *************************************************** */
+
+
+cells.forEach(cell => {
+  
+  if((cell.textContent === 'clc') || (cell.textContent === 'DEL')){
+    cell.classList.add('clearorDelete')
+  }
+} )

@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  
+  <script src="calculator.js" defer></script>
   <script src="calculatorLook.js" defer></script>
   <script src="app.js" defer></script>
   
@@ -13,35 +13,50 @@
 </head>
 <body>
   <div class="main">
-    
-    <div class="grid" style="background-color: blueviolet;">
-      <div class="result"></div> <!--fenetre du result-->
+
+    <div class="grid" >
+      <!-- <div class="result r">
+        <span id="firstOperand"></span>
+        <span id="op"></span>
+        <span id="secondOperand"></span>
+        <span id="result"></span>
+      </div> fenetre du result -->
 
       <div class="numbers">
-        <!-- <div class="row">
-          <button class="cell">(</button>
-          <button class="cell">)</button>
-          <button class="cell">T</button>
-          <button class="cell">+/-</button>
-        </div> -->
-        
-        <div class="row1"></div> <!--contains var numm / * +-->
-        <div class="row"></div>
-        <div class="flex-container">
-          
-          <div class="numberRows"> <!--contains numbers beside 0 -->
-            <div class="numbers1"></div>
-            <div class="numbers2"></div>
-            <div class="numbers3"></div>
-            <div class="lastRow"></div>
+        <div class="result r">
+          <div class="resultContainer">
+            <div>
+              <span id="firstOperand"></span>
+              <span id="op"></span>
+              <span id="secondOperand"></span>
+
+            </div>
+            <div>
+              <div id="result"></div>
+            </div>
+            
           </div>
-          <div class="col"></div> <!--Plus and enter-->
+          
+        </div> <!--fenetre du result-->
+        
+        <div class="container">
+          <div class="row1"></div> <!--contains var numm / * +-->
+          <div class="row"></div>
+          <div class="flex-container">
+          
+            <div class="numberRows"> <!--contains numbers beside 0 -->
+              <div class="numbers1"></div>
+              <div class="numbers2"></div>
+              <div class="numbers3"></div>
+              <div class="lastRow"></div>
+            </div>
+           <div class="col"></div> <!--Plus and enter-->
+          </div>
         </div>
+        
 
 
       </div>
-      
-     
     </div>
   </div>
 </body>
