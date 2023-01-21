@@ -1,0 +1,70 @@
+.grid{
+  /* height: 500px;
+  width: 300px; */
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.result{
+  background-color: green;
+  margin: 30px;
+  padding: 20px;
+  width: 290px;
+  text-align: center;
+
+}
+
+
+ .numbers{
+  background-color: pink;
+  /* height: 450px;
+  height: 50px; */
+  margin: 30px;
+  padding: 20px;
+  align-items: center;
+  
+  
+
+} 
+.row1{
+  display: inline-block;
+  overflow: auto;
+}
+
+.row1{
+  display: inline-block;
+  overflow: auto;
+}
+
+.cell{
+  margin: 5px;
+  width: 60px;
+  height: 50px;
+}
+
+.cellR{
+  width: 130px;
+}
+ .cell, .cellP{
+  cursor: pointer;
+ }
+.cellP{
+  margin: 5px;
+  width: 60px;
+  height: 110px;
+}
+
+.flex-container{
+  display: flex;
+}
+
+.col{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
