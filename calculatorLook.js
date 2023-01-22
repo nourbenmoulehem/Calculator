@@ -116,22 +116,6 @@ cells.forEach(cell => {
 });
 
 
-
-
-
-
- 
-
-
-
-
-// numbers.addEventListener("click", function(event){
-//   if(event.target.classList.contains("aNumber")){
-//     // console.log("hello")
-//     // firstValue += this.textContent;
-//     console.log(this.textContent)
-//   }
-// });
 const firstOperand = document.getElementById("firstOperand")
 const secondOperand = document.getElementById("secondOperand")
 const op = document.getElementById("op")
@@ -150,12 +134,10 @@ cells.forEach(cell =>{
       secondValue += this.textContent;
       secondOperand.textContent += this.textContent;
     }
-    // else if((firstOperand.textContent != '') && (secondOperand.textContent != '')){
-    //   resetCalculator();
-    //   firstOperand.textContent = this.textContent
-    //   console.log(firstOperand)
-    //   console.log("chairgfhjir")
-    // }
+    if(result.textContent != ''){
+      resetCalculator();
+      firstOperand = this.textcontent;
+    }
     
   });
   
