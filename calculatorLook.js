@@ -1,18 +1,15 @@
 const row1 = document.querySelector('.row1');
 const row = document.querySelector('.row');
 const numberRows = document.querySelector('.numberRows');
-// const numbers = document.querySelector('.numbers');
 const col = document.querySelector('.col');
 const lastRow = document.querySelector('.lastRow');
 const numbers1 = document.querySelector('.numbers1');
-
-
 const items = ["clc", "DEL", "*", '-', '+', 'Enter', '0', '.'];
 const numbers2 = document.querySelector('.numbers2');
 const numbers3 = document.querySelector('.numbers3');
-
 const numbers = document.querySelector('.numbers');
 
+//appending calculator buttons
 let cells = [];
 function gridCalculatorButtons(){
   
@@ -90,19 +87,20 @@ function plusAndEnterColumn() {
     };
   }
 
-
-
-
-const numeros = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-const operations = ["+", "-", "*", "/"];
-const comma = "."
-
-
 firstRow()
 gridCalculatorButtons();
 numberButtons();
 RowThatContainsZero();
 plusAndEnterColumn();
+
+
+const numeros = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+const operations = ["+", "-", "*", "/"];
+const comma = "."
+const firstOperand = document.getElementById("firstOperand")
+const secondOperand = document.getElementById("secondOperand")
+const op = document.getElementById("op")
+const r = document.querySelector('.r')
 
 let operator = "";
 let firstValue = "";
@@ -116,10 +114,7 @@ cells.forEach(cell => {
 });
 
 
-const firstOperand = document.getElementById("firstOperand")
-const secondOperand = document.getElementById("secondOperand")
-const op = document.getElementById("op")
-const r = document.querySelector('.r')
+
 
 const result = document.getElementById('result')
 cells.forEach(cell =>{
@@ -248,8 +243,7 @@ cells.forEach(cell =>{
   )
 })
 
-  resultBloc = document.querySelector('.result')
-  history = document.querySelector('.history')
+  
 cells.forEach(cell =>{
   cell.addEventListener('click', () =>{
     
@@ -262,7 +256,8 @@ cells.forEach(cell =>{
   }
   )
 })
-history.textContent = 'hello';
+
+
 function resetCalculator(){
       firstValue = "";
       secondValue = "";
@@ -272,7 +267,8 @@ function resetCalculator(){
       result.textContent = ""
       op.textContent = ""
 }
-// operate(parseInt(firstValue), parseInt(secondValue), operator)
+
+//operations
 
 const add = function(a, b) {
   return a + b;
@@ -286,11 +282,6 @@ const subtract = function(a, b) {
 
 
 const multiply = function(a, b) {
-  // let sum = 1;
-
-	// for(let i = 0; i < array.length; i ++){
-  //   sum *= array[i];
-  // }
   return a * b;
 
 };
@@ -298,9 +289,9 @@ const multiply = function(a, b) {
 
 const divide = function(a, b) {
 	if (b === 0) 
-        return -1;
+    return -1;
   else 
-      return a/b;
+    return a/b;
     
   
 };
@@ -340,3 +331,9 @@ cells.forEach(cell => {
     cell.classList.add('clearorDelete')
   }
 } )
+
+
+// resultBloc = document.querySelector('.result')
+//   history = document.querySelector('.history') I MIGHT ADD HISTORY OF OPERATIONS LATER
+
+/* *************************************************** */
